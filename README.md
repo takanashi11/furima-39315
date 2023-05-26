@@ -30,12 +30,13 @@ Things you may want to cover:
 
 | Column             | Type   | Options                 |
 | ------------------ | ------ | ----------------------- |
+| surname            | string | null: false             |
 | name               | string | null: false             |
-| email              | string | null: false unique: true|
+| katakana_surname   | string | null: false             |
+| katakana_name      | string | null: false             |
 | encrypted_password | string | null: false             |
-| name full-width    | string | null: false             |
-| Name half-width    | string | null: false             |
-| birth              | integer| null: false             |
+| email              | string | null: false unique: true|
+| birth              | date   | null: false             |
 
 ### Association
 
@@ -45,13 +46,17 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-| price  | integer| null: false |
-| text   | text   | null: false |
-| detail | string | null: false |
-|delivery| string | null: false |
+| Column           | Type       | Options                        |
+| ------           | ------     | -----------                    |
+| item_name        | string     | null: false                    |
+| item_text        | text       | null: false                    |
+| category_id      | integer    | null: false                    |
+| detail_id        | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| region_id        | integer    | null: false                    | 
+| days_to_Ship_id  | integer    | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
 ### Association
 
 - belongs_to :user
@@ -72,14 +77,14 @@ Things you may want to cover:
 - has_one :adresses
 ## addresses テーブル
 
-| Column         | Type       | Options                        |
-| -------        | ---------- | ------------------------------ |
-|post code       | string     | null: false, foreign_key: true |
-|prefectures     | string     | null: false, foreign_key: true |
-|municipalities  | string     | null: false, foreign_key: true |
-|house number    | integer    | null: false, foreign_key: true |
-|Building name   | string     | null: false, foreign_key: true |
-|telephone number| integer    | null: false, foreign_key: true |
+| Column         | Type       | Options     |
+| -------        | ---------- | ----------- |
+|post_code       | string     | null: false |
+|prefecture_id   | integer    | null: false |
+|municipalities  | string     | null: false |
+|house_number    | string     | null: false |
+|building_name   | string     | null: false |
+|telephone_number| string     | null: false |
 
 ### Association
 
