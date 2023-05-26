@@ -30,12 +30,13 @@ Things you may want to cover:
 
 | Column             | Type   | Options                 |
 | ------------------ | ------ | ----------------------- |
+| nickname           | string | null: false             |
+| email              | string | null: false unique: true|
+| encrypted_password | string | null: false             |
 | surname            | string | null: false             |
 | name               | string | null: false             |
 | katakana_surname   | string | null: false             |
 | katakana_name      | string | null: false             |
-| encrypted_password | string | null: false             |
-| email              | string | null: false unique: true|
 | birth              | date   | null: false             |
 
 ### Association
@@ -60,21 +61,21 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one    :purchases
+- has_one    :purchase
 
 
 ## purchases テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| comment| references | null: false, foreign_key: true |
+| Column | Type       | Options    |
+| ------ | ---------- | -----------|
+| user   | references | null: false|
+| item   | references | null: false|
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- has_one :adresses
+- has_one :adresse
 ## addresses テーブル
 
 | Column         | Type       | Options     |
@@ -83,7 +84,7 @@ Things you may want to cover:
 |prefecture_id   | integer    | null: false |
 |municipalities  | string     | null: false |
 |house_number    | string     | null: false |
-|building_name   | string     | null: false |
+|building_name   | string     |             |
 |telephone_number| string     | null: false |
 
 ### Association
