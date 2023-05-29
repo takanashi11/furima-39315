@@ -11,6 +11,7 @@ class User < ApplicationRecord
          validates :name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/}
          validates :katakana_surname, presence: true, format: { with: /\A[\p{Katakana}\p{Space}ー－]+\z/}
          validates :katakana_name, presence: true, format: { with: /\A[\p{Katakana}\p{Space}ー－]+\z/}
+         validates :birth,presence: true
   has_many :items
   has_many :purchases
 
