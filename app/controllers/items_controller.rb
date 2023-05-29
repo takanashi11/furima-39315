@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
  # before_action :move_to_index, except: [:index, :show]
 
   def index
-    @item = Item.all
+    #@item = Item.all
   end
 
   def new
@@ -10,8 +10,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    ###Item.create(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
+  
 
   private
 
