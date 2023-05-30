@@ -20,37 +20,37 @@ describe '商品出品機能' do
   end
 
   it '商品の説明が必須であること' do
-    @item.item_text = ''
+    @item.item_text = nil
     @item.valid?
     expect(@item.errors.full_messages).to include("Item text can't be blank")
   end
 
   it 'カテゴリーの情報が必須であること' do
-    @item.category_id = nil
+    @item.category_id = '1'
     @item.valid?
     expect(@item.errors.full_messages).to include("Category can't be blank")
   end
 
   it '商品の状態の情報が必須であること' do
-    @item.detail_id = nil
+    @item.detail_id = '1'
     @item.valid?
     expect(@item.errors.full_messages).to include("Detail can't be blank")
   end
 
   it '配送料の負担の情報が必須であること' do
-    @item.region_id = nil
+    @item.region_id = '1'
     @item.valid?
     expect(@item.errors.full_messages).to include("Region can't be blank")
   end
 
   it '発送元の地域の情報が必須であること' do
-    @item.profecture_id = nil
+    @item.profecture_id = '1'
     @item.valid?
     expect(@item.errors.full_messages).to include("Profecture can't be blank")
   end
 
   it '発送までの日数の情報が必須であること' do
-    @item.days_to_ship_id = nil
+    @item.days_to_ship_id = '1'
     @item.valid?
     expect(@item.errors.full_messages).to include("Days to ship can't be blank")
   end
@@ -72,5 +72,18 @@ describe '商品出品機能' do
     @item.valid?
     expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
   end
+
+  it "priceが半角入力であること" do
+    @item.price = "１０００" 
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Price is not a number")
+  end
+
+  it "userが紐づいていること" do
+    @item.user = nil
+    @item.valid?
+    expect(@item.errors.full_messages).to include("User must exist")
+  end
+end
 end
 end
