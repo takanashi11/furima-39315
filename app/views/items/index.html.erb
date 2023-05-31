@@ -124,9 +124,10 @@
     <ul class='item-lists'>
       <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item) do %>
         <div class='item-img-content'>
-          <%= image_tag(item.image.variant(resize: '400x400'), class: :card__img) if item.image.attached? %>
+           <%= image_tag(item.image.variant(resize: '300x300'), class: :card__img) if item.image.attached? %>
+          
           <%#= image_tag "item-sample.png", class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
@@ -154,7 +155,7 @@
         <% end %>
       </li>
       <% end %>
-
+      
       <% if @items.blank? %>
       <li class='list'>
         <%= link_to '#' do %>
