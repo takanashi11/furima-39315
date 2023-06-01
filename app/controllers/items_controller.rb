@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only:[:edit,:update]
+  before_action :set_item, only:[:show,:edit,:update]
   before_action :move_to_index, except: [:index, :show]
 
 
@@ -22,15 +22,14 @@ class ItemsController < ApplicationController
 
 
   def show
-    @item = Item.find(params[:id])
+
   end
 
   def edit
-    @item = Item.find(params[:id])
+
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
     redirect_to item_path
     else 
@@ -53,8 +52,8 @@ class ItemsController < ApplicationController
       redirect_to new_user_session_path
       return
     end
-    unless @item.nil? ||@item.user.nil? || current_user.id == @item.user.id
-      redirect_to new_user_session_path
+    if @item.nil? || @item.user.nil? || current_user.id != @item.user.id
+      redirect_to root_path
      end
     
   end
