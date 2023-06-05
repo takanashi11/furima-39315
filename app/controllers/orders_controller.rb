@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only: [:index,:create]
+  before_action :move_to_index, except: [:create]
+  before_action :move_to_index2, except: [:create]
+
   def index
    @purchase_address = PurchaseAddress.new
    @item = Item.find(params[:item_id])
@@ -28,5 +33,21 @@ class OrdersController < ApplicationController
       card: purchase_address_params[:token],    
       currency: 'jpy'              
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def move_to_index2
+    if @item.user_id != current_user.id && @item.purchase.present?
+      redirect_to root_path
+    end
   end
 end
