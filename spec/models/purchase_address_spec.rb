@@ -12,6 +12,10 @@ RSpec.describe PurchaseAddress, type: :model do
         it '全ての情報が正しく入力されていれば正常に保存されること' do
           expect(@purchase_address).to be_valid
         end
+        it '建物名は任意であること' do
+          @purchase_address.building_name = nil
+          expect(@purchase_address).to be_valid
+        end
       end
     
       context '正常に保存できない場合' do
@@ -28,7 +32,7 @@ RSpec.describe PurchaseAddress, type: :model do
         end
   
         it '都道府県が必須であること' do
-          @purchase_address.profecture_id = nil
+          @purchase_address.profecture_id = '1'
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Profecture can't be blank")
         end
@@ -43,11 +47,6 @@ RSpec.describe PurchaseAddress, type: :model do
           @purchase_address.house_number = nil
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("House number can't be blank")
-        end
-  
-        it '建物名は任意であること' do
-          @purchase_address.building_name = nil
-          expect(@purchase_address).to be_valid
         end
   
         it '電話番号が必須であること' do

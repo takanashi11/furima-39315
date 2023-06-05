@@ -11,7 +11,7 @@ class PurchaseAddress
     validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: "should be a 10 to 11-digit numeric value" }
     validates :token
   end
-  validates :profecture_id, numericality: {other_than: 0, message: "can't be blank"}
+  validates :profecture_id, numericality: {other_than: 1, message: "can't be blank"}
 
   def save
     if valid?
